@@ -73,14 +73,14 @@ class _MapScreenState extends State<MapScreen2> {
 
   @override
   void initState(){
-    //intilize();
+
    // getMapId();
+    intilize();
     super.initState();
 
-    loadData();
   }
 
-  loadData () async {
+  //loadData () async {
     /*for(int i = 0; i< images.length; i++){
 
       final Uint8List markerIcon = await getBytesFromAssets(images[i], 100);
@@ -97,15 +97,14 @@ class _MapScreenState extends State<MapScreen2> {
 
       });
     }*/
-  }
+  //}
 
 
 
 
   //bitmapdescriptor custom icons
-  intilize(specify, specifyId) async {
-    var markerIdVal = specifyId;
-    final MarkerId markerId = MarkerId(markerIdVal);
+
+  intilize() async {
    // BitmapDescriptor med = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/hospital.png");
     final Uint8List newIcon = await getMarkerIcon("assets/hospital.png", 500);
     //BitmapDescriptor police = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/badges.png");
@@ -283,18 +282,6 @@ class _MapScreenState extends State<MapScreen2> {
       markers[markerId] = _marker;
     });
   }*/
-  void initMarker(request , requestId) async {
-    var markerIdVal = requestId;
-    final MarkerId markerId = MarkerId(markerIdVal);
-    final Marker marker = Marker(
-      markerId: markerId,
-      position: LatLng(request['coords'].latitude , request['coords'].longitude),
-      infoWindow: InfoWindow(title: 'Pj healthcare and maternity' , snippet: request['place']),
-    );
-    setState(() {
-      markers[markerId] = marker;
-    });
-  }
 
   /*getMapId() async {
     FirebaseFirestore.instance.collection('markers').get().then((myMarkers) {
@@ -331,10 +318,8 @@ class _MapScreenState extends State<MapScreen2> {
                   zoomControlsEnabled: true,
                   zoomGesturesEnabled: true,
                   compassEnabled: true,
-                  markers: Set<Marker>.of(
-                    markers.values
-                  ),
-                  //markers: _markers.map((e) => e).toSet(),
+
+                  markers: _markers.map((e) => e).toSet(),
                   onTap: (position){
                     _customInfoWindowController.hideInfoWindow!();
                   },
